@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +100,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# tell Django to use your custom user model
+AUTH_USER_MODEL = 'user.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
