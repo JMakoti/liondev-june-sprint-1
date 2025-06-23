@@ -57,7 +57,7 @@ class UserViewSet(viewsets.ModelViewSet):
 # Function-based views for web interface
 @login_required
 def profile_view(request):
-    return render(request, 'user/profile.html', {
+    return render(request, 'users/profile.html', {
         'user': request.user
     })
 
