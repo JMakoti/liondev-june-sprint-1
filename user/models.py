@@ -1,31 +1,15 @@
-from django.db import models
+# filepath: attendance_system/users/models.pyAdd commentMore actions
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
-class User(AbstractUser):
-    STAFF = 'staff'
-    COMMUNITY = 'community'
-    
-    USER_TYPE_CHOICES = [
-        (STAFF, 'Staff'),
-        (COMMUNITY, 'Community Member'),
-    ]
-    
-    user_type = models.CharField(
-        max_length=20,
-        choices=USER_TYPE_CHOICES,
-        default=COMMUNITY,
+class CustomUser(AbstractUser):
+    USER_TYPE_CHOICES = (
+        ('staff', 'Staff'),
+        ('community', 'Community Member'),
     )
     
-    # Add these to properly handle staff/superuser permissions
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    phone_number = models.CharField(max_length=15)
     
-    def is_staff_member(self):
-        return self.user_type == self.STAFF or self.is_staff
-    
-    def is_community(self):
-        return self.user_type == self.COMMUNITY
-
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+    def is_staff_user(self):
+        return self.user_type == 'staff'
